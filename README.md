@@ -1,16 +1,25 @@
-# React + Vite
+Области хранения данных:
+- база данных на json-server
+- BFF
+- redux store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Сущности приложения:
+- пользователь: БД (список пользователей), BFF (сессия текущего пользователя), redux store(отображение в браузере)
+- роль пользователя: БД (список ролей), BFF (сессия пользователя с ролью), redux store (использование на клиенте)
+- статья: БД (список статей), redux store (отображение в браузере)
+- комментарии: БД (список комментариев), redux store (отображение в браузере)
 
-Currently, two official plugins are available:
+Таблицы БД:
+- пользователи - users: id / login / password / registered_at / role_id
+- роли - roles: id / name
+- статьи - posts: id / title / image_url / content / published_at
+- комментарии - comments: id / author_id / post_id / content
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Схема состояния на BFF: 
+- сессия текущего пользователя: login / password / role
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Схема для store (на клиенте):
+- user: id / login / roleId
+- posts: array post: id / title / imageUrl / publishedAt / commentsCount
+- post: array post: id / title / imageUrl / content /  publishedAt / comments: array comment: id / author / content / publishedAt
+- users: array user: id / login / registeredAt / role
