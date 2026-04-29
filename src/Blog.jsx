@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Routes, Route } from 'react-router-dom'
+import { Header } from './components'
 const Content = styled.div`
   padding: 187px 0;
 `
@@ -8,8 +9,8 @@ const H2 = styled.h2`
   text-align: center;
 `
 
-const Header = () => <div>Шапка сайта</div>
 const Footer = () => <div>Подвал</div>
+
 function Blog() {
   return (
     <>
