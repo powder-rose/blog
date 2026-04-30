@@ -14,7 +14,7 @@ export const OvalButton = styled(OvalButtonContainer)`
   width: ${({ width }) => width || 130}px;
   border: none;
   border-radius: 15px;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
   &:hover {
     background-color: ${({ backgroundhover }) => backgroundhover};

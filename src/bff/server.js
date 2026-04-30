@@ -1,28 +1,37 @@
 import { getUser } from './get-user.js'
 import { createUser } from './create-user.js'
-import { createSession } from 'create-session.js'
+import { sessions } from './sessions.js'
 
 export const server = {
+  async logout(session) {
+    sessions.remove(session)
+  },
+
   async authorize(authLogin, authPassword) {
     const user = await getUser(authLogin)
 
     if (!user) {
       return {
-        error: 'No user found.',
+        error: 'Пользователь не найден',
         response: null,
       }
     }
 
     if (authPassword !== user.password) {
       return {
-        error: 'Wrong password',
+        error: 'Неверный пароль',
         response: null,
       }
     }
 
     return {
       error: null,
-      response: createSession(user.role_id),
+      res: {
+        id: user.id,
+        login: user.login,
+        roleId: user.role_id,
+        session: sessions.create(user),
+      },
     }
   },
 
@@ -31,7 +40,7 @@ export const server = {
 
     if (user) {
       return {
-        error: 'User already exists',
+        error: 'Пользователь уже существует',
         response: null,
       }
     }
@@ -40,7 +49,12 @@ export const server = {
 
     return {
       error: null,
-      response: createSession(user.role_id),
+      res: {
+        id: user.id,
+        login: user.login,
+        roleId: user.roleId,
+        session: sessions.create(user),
+      },
     }
   },
 }

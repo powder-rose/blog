@@ -1,25 +1,27 @@
 import styled from 'styled-components'
 import { Routes, Route } from 'react-router-dom'
-import { Header } from './components'
+import { Header, Footer } from './components'
+import { Authorization } from './pages'
+
 const Content = styled.div`
   padding: 187px 0;
 `
 
-const H2 = styled.h2`
-  text-align: center;
+const AppContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 `
-
-const Footer = () => <div>Подвал</div>
 
 function Blog() {
   return (
-    <>
+    <AppContent>
       <Header />
       <Content>
-        <H2>Контент страницы</H2>
         <Routes>
           <Route path="/" element={<div>Главная</div>}></Route>
-          <Route path="/login" element={<div>Авторизация</div>}></Route>
+          <Route path="/login" element={<Authorization />}></Route>
           <Route path="/register" element={<div>Регистрация</div>}></Route>
           <Route path="/users" element={<div>Пользователи</div>}></Route>
           <Route path="/post/:post_id" element={<div>Статья</div>}></Route>
@@ -28,7 +30,7 @@ function Blog() {
         </Routes>
       </Content>
       <Footer />
-    </>
+    </AppContent>
   )
 }
 

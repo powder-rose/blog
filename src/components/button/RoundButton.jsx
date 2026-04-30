@@ -12,7 +12,7 @@ export const RoundButton = styled(ButtonContainer)`
   width: 40px;
   height: 40px;
   background-color: #fff;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
   border: none;
   border-radius: 50%;
 

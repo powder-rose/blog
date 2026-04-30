@@ -1,10 +1,22 @@
 import styled from 'styled-components'
-import { RoundButton } from '../button/RoundButton.jsx'
+import { RoundButton } from '../../../button/RoundButton.jsx'
 import { faFileLines } from '@fortawesome/free-regular-svg-icons'
 import { Icon } from '../../../icon/Icon.jsx'
-import { faUserGroup } from '@fortawesome/free-solid-svg-icons'
-import { OvalButton } from '../button/OvalButton.jsx'
+import {
+  faArrowRightFromBracket,
+  faUserGroup,
+} from '@fortawesome/free-solid-svg-icons'
+import { OvalButton } from '../../../button/OvalButton.jsx'
 import { Link, useNavigate } from 'react-router-dom'
+import { ROLE } from '../../../../constants/index.js'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  selectUserLogin,
+  selectUserRole,
+  selectUserSession,
+} from '../../../../selectors'
+import { logout } from '../../../../actions'
+
 const RightAligned = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -21,6 +33,10 @@ const RightAlignedColumn = styled.div`
 
 const ControlPanelContainer = ({ className }) => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const roleId = useSelector(selectUserRole)
+  const login = useSelector(selectUserLogin)
+  const session = useSelector(selectUserSession)
 
   return (
     <div className={className}>
@@ -37,11 +53,22 @@ const ControlPanelContainer = ({ className }) => {
         </Link>
       </RightAligned>
       <RightAlignedColumn>
-        <Link to="/login">
-          <OvalButton backgroundhover="#d985ff" background="#e09cff">
-            Войти
-          </OvalButton>
-        </Link>
+        {roleId === ROLE.GUEST ? (
+          <Link to="/login">
+            <OvalButton backgroundhover="#d985ff" background="#e09cff">
+              Войти
+            </OvalButton>
+          </Link>
+        ) : (
+          <>
+            <div>{login}</div>
+            <Icon
+              onClick={() => dispatch(logout(session))}
+              size={23}
+              id={faArrowRightFromBracket}
+            />
+          </>
+        )}
         <OvalButton onClick={() => navigate(-1)}>Назад</OvalButton>
       </RightAlignedColumn>
     </div>
