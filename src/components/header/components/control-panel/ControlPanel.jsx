@@ -90,4 +90,9 @@ const ControlPanelContainer = ({ className }) => {
   )
 }
 
-export const ControlPanel = styled(ControlPanelContainer)``
+export const ControlPanel = styled(ControlPanelContainer)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+`
