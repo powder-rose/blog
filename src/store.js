@@ -5,6 +5,7 @@ import {
   usersReducer,
   postReducer,
   postsReducer,
+  appReducer,
 } from './reducers'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENTION_COMPOSE__ || compose
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   users: usersReducer,
   post: postReducer,
   posts: postsReducer,
+  app: appReducer,
 })
 export const store = createStore(
   reducer,

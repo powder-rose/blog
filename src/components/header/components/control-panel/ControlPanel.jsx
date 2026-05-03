@@ -31,6 +31,21 @@ const RightAlignedColumn = styled.div`
   gap: 10px;
 `
 
+const IconButton = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-left: 7px;
+`
+const ContainerUser = styled.div`
+  display: flex;
+  justify-content: end;
+  margin: 10px;
+`
+const BoldText = styled.p`
+  font-weight: bold;
+`
+
 const ControlPanelContainer = ({ className }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -40,6 +55,14 @@ const ControlPanelContainer = ({ className }) => {
 
   return (
     <div className={className}>
+      {roleId !== ROLE.GUEST ? (
+        <ContainerUser>
+          <BoldText>{login}</BoldText>
+          <IconButton onClick={() => dispatch(logout(session))}>
+            <Icon size={20} id={faArrowRightFromBracket} />
+          </IconButton>
+        </ContainerUser>
+      ) : null}
       <RightAligned>
         <Link to="/post">
           <RoundButton title="Новая статья">
@@ -59,16 +82,8 @@ const ControlPanelContainer = ({ className }) => {
               Войти
             </OvalButton>
           </Link>
-        ) : (
-          <>
-            <div>{login}</div>
-            <Icon
-              onClick={() => dispatch(logout(session))}
-              size={23}
-              id={faArrowRightFromBracket}
-            />
-          </>
-        )}
+        ) : null}
+
         <OvalButton onClick={() => navigate(-1)}>Назад</OvalButton>
       </RightAlignedColumn>
     </div>

@@ -11,6 +11,7 @@ const initialUserState = {
 export const userReducer = (state = initialUserState, action) => {
   switch (action.type) {
     case ACTION_TYPE.SET_USER:
+    case ACTION_TYPE.SET_SESSION:
       return {
         ...state,
         ...action.payload,

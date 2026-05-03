@@ -26,7 +26,7 @@ export const server = {
 
     return {
       error: null,
-      res: {
+      response: {
         id: user.id,
         login: user.login,
         roleId: user.role_id,
@@ -49,7 +49,7 @@ export const server = {
 
     return {
       error: null,
-      res: {
+      response: {
         id: user.id,
         login: user.login,
         roleId: user.roleId,
