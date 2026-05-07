@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-const ButtonContainer = ({ className, children, title }) => (
+const ButtonContainer = ({ className, children, title, ...props }) => (
   <>
-    <button title={title} className={className}>
+    <button title={title} className={className} {...props}>
       {children}
     </button>
   </>
@@ -16,8 +16,9 @@ export const RoundButton = styled(ButtonContainer)`
   border: none;
   border-radius: 50%;
 
+  color: ${({ disabled }) => (disabled ? '#ccc' : '')};
   &:hover {
-    background-color: #f8f3ff;
+    background-color: ${({ disabled }) => (disabled ? '#fff' : '#f8f3ff')};
     cursor: pointer;
   }
 `
