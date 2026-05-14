@@ -2,8 +2,37 @@ import styled from 'styled-components'
 import { Icon, RoundButton } from '../../../../components'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch } from 'react-redux'
+import { CLOSE_MODAL, openModal, removeCommentAsync } from '../../../../actions'
+import { useServerRequest } from '../../../../hooks'
 
-const CommentContainer = ({ className, author, content, publishedAt }) => {
+const CommentContainer = ({
+  className,
+  postId,
+  id,
+  author,
+  content,
+  publishedAt,
+}) => {
+  const dispatch = useDispatch()
+  const requestServer = useServerRequest()
+
+  const onCommentRemove = (id) => {
+    dispatch(
+      openModal({
+        text: 'Удалить комментарий?',
+        onConfirm: () => {
+          dispatch(removeCommentAsync(requestServer, postId, id))
+          dispatch(CLOSE_MODAL)
+        },
+
+        onCancel: () => {
+          dispatch(CLOSE_MODAL)
+        },
+      })
+    )
+  }
+
   return (
     <div className={className}>
       <div className="comment">
@@ -17,7 +46,12 @@ const CommentContainer = ({ className, author, content, publishedAt }) => {
         <div className="comment-text">{content}</div>
       </div>
 
-      <RoundButton className="trash-button">
+      <RoundButton
+        onClick={() => {
+          onCommentRemove(id)
+        }}
+        className="trash-button"
+      >
         <Icon size={20} id={faTrash} />
       </RoundButton>
     </div>
@@ -28,7 +62,7 @@ export const Comment = styled(CommentContainer)`
   display: flex;
   align-items: center;
   border-radius: 15px;
-
+  width: 100%;
   & .information-panel {
     display: flex;
     justify-content: space-between;
@@ -47,6 +81,7 @@ export const Comment = styled(CommentContainer)`
 
   & .trash-button {
     box-shadow: none;
+    min-width: 40px;
   }
 
   & .published-at {

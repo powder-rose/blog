@@ -5,6 +5,7 @@ import { Post, Authorization, Registaration, Users } from './pages'
 import { useLayoutEffect } from 'react'
 import { setUser } from './actions'
 import { useDispatch } from 'react-redux'
+import { Modal } from './components'
 
 const Page = styled.div`
   padding: 187px 0;
@@ -47,6 +48,7 @@ function Blog() {
         </Routes>
       </Page>
       <Footer />
+      <Modal />
     </AppContent>
   )
 }

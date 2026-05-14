@@ -38,21 +38,14 @@ export const PostContent = styled(PostContentContainer)`
   margin: 0 auto;
   align-items: center;
 
-  & .content {
-    width: 900px;
-    display: flex;
-    justify-content: space-evenly;
-  }
-
   & .post-image {
-    width: 500px;
-    height: 450px;
+    min-width: 500px;
+    min-height: 450px;
     border-radius: 15px;
   }
 
   & .post {
-    display: flex;
-    flex-direction: column;
+    width: 50%;
     margin-left: 30px;
   }
 
@@ -63,6 +56,7 @@ export const PostContent = styled(PostContentContainer)`
 
   & .post-button {
     border: 1px solid #000;
+    min-width: 40px;
   }
 
   & .control-panel {
@@ -72,5 +66,9 @@ export const PostContent = styled(PostContentContainer)`
 
   & .h2-post {
     margin-right: 30px;
+  }
+
+  & .control-panel {
+    min-width: 500px;
   }
 `
