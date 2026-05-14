@@ -9,8 +9,8 @@ import { Input, H2, AuthFormError } from '../../components'
 import { Link, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSession } from '../../actions'
-import { selectUserRole } from '../../selectors/index.js'
-import { ROLE } from '../../constants/index.js'
+import { selectUserRole } from '../../selectors'
+import { ROLE } from '../../constants'
 import { useResetForm } from '../../hooks'
 
 const authFormSchema = yup.object().shape({
@@ -63,6 +63,7 @@ const AuthorizationContainer = ({ className }) => {
         return
       }
       dispatch(setSession(response))
+      sessionStorage.setItem('userData', JSON.stringify(response))
     })
   }
 

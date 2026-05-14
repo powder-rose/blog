@@ -3,4 +3,5 @@ export const generateDate = () => {
     .toISOString()
     .substring(0, 16)
     .replace('T', ' ')
+    .replaceAll('-', '.')
 }

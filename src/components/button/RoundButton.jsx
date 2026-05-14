@@ -11,8 +11,9 @@ const ButtonContainer = ({ className, children, title, ...props }) => (
 export const RoundButton = styled(ButtonContainer)`
   width: 40px;
   height: 40px;
+  margin: 5px;
   background-color: #fff;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 2px 4px 0 rgba(0, 0, 0, 0.2);
   border: none;
   border-radius: 50%;
 

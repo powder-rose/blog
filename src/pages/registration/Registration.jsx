@@ -8,10 +8,10 @@ import { useResetForm } from '../../hooks'
 import styled from 'styled-components'
 import { Input, H2, AuthFormError } from '../../components'
 import { Navigate } from 'react-router-dom'
-import { useDispatch, useStore, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setSession } from '../../actions'
-import { selectUserRole } from '../../selectors/index.js'
-import { ROLE } from '../../constants/index.js'
+import { selectUserRole } from '../../selectors'
+import { ROLE } from '../../constants'
 
 const registeredFormSchema = yup.object().shape({
   login: yup
@@ -68,6 +68,7 @@ const RegistrationContainer = ({ className }) => {
         return
       }
       dispatch(setSession(response))
+      sessionStorage.setItem('userData', JSON.stringify(response))
     })
   }
 

@@ -50,8 +50,8 @@ export const Footer = styled(FooterContainer)`
   align-items: center;
   background-color: #bea3d4;
   width: 100%;
-  height: 112px;
   padding: 25px;
   font-weight: bold;
   line-height: 21px;
+  min-height: 112px;
 `

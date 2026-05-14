@@ -12,7 +12,7 @@ export const Header = styled(HeaderContainer)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  z-index: 1;
   height: 187px;
   position: fixed;
   width: 100%;

@@ -53,12 +53,17 @@ const ControlPanelContainer = ({ className }) => {
   const login = useSelector(selectUserLogin)
   const session = useSelector(selectUserSession)
 
+  const onLogout = () => {
+    dispatch(logout(session))
+    sessionStorage.removeItem('userData')
+  }
+
   return (
     <div className={className}>
       {roleId !== ROLE.GUEST ? (
         <ContainerUser>
           <BoldText>{login}</BoldText>
-          <IconButton onClick={() => dispatch(logout(session))}>
+          <IconButton onClick={onLogout}>
             <Icon size={20} id={faArrowRightFromBracket} />
           </IconButton>
         </ContainerUser>
