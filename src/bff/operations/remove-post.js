@@ -1,8 +1,8 @@
 import { ROLE } from '../constants'
 import { sessions } from '../sessions.js'
-import { addPost, updatePost } from '../api'
+import { deletePost, deletePostComment, getComments } from '../api'
 
-export const savePost = async (hash, newPostData) => {
+export const removePost = async (hash, id) => {
   const accessRoles = [ROLE.ADMIN]
 
   const access = await sessions.access(hash, accessRoles)
@@ -13,15 +13,18 @@ export const savePost = async (hash, newPostData) => {
       response: null,
     }
   }
-  const savedPost =
-    newPostData.id === ''
-      ? await addPost(newPostData)
-      : await updatePost(newPostData)
 
-  console.log(savedPost)
+  await deletePost(id)
+
+  const comments = await getComments(id)
+  await Promise.all(
+    comments.map(({ id: commentId }) => {
+      deletePostComment(commentId)
+    })
+  )
 
   return {
     error: null,
-    response: savedPost,
+    response: true,
   }
 }

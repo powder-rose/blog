@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { SpecialPanel } from './special-panel/SpecialPanel.jsx'
-import { useRef } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { sanitizeContent } from './utils/index.js'
 import { useDispatch } from 'react-redux'
 import { savePostAsync } from '../../../actions/save-post-async.js'
@@ -15,28 +15,36 @@ const PostFormContainer = ({
   className,
 }) => {
   const dispatch = useDispatch()
-  const imageRef = useRef(null)
-  const titleRef = useRef(null)
+  const [imageUrlValue, setImageUrlValue] = useState(imageUrl)
+  const [titleValue, setTitleValue] = useState(title)
+
+  useLayoutEffect(() => {
+    setTitleValue(title)
+    setImageUrlValue(imageUrl)
+  }, [title, imageUrl])
   const contentRef = useRef(null)
   const navigate = useNavigate()
   const requestServer = useServerRequest()
 
   const onSave = () => {
-    const newImageUrl = imageRef.current.value
-    const newContent = sanitizeContent(contentRef.current.innerHTML)
-    const newTitle = titleRef.current.value
+    const newContent = sanitizeContent(contentRef.current.innerText)
 
     dispatch(
       savePostAsync(requestServer, {
         id,
-        title: newTitle,
-        imageUrl: newImageUrl,
+        title: titleValue,
+        imageUrl: imageUrlValue,
         content: newContent,
       })
-    ).then(() => {
-      navigate(`/post/${id}`)
+    ).then((post) => {
+      console.log(post)
+      navigate(`/post/${post.id}`)
     })
   }
+
+  const onChangeImageUrl = ({ target }) => setImageUrlValue(target.value)
+  const onChangeTitle = ({ target }) => setTitleValue(target.value)
+
   return (
     <div className={className}>
       {imageUrl && (
@@ -47,17 +55,18 @@ const PostFormContainer = ({
       <div className="post">
         <div className="input-box">
           <input
-            ref={imageRef}
-            defaultValue={imageUrl}
+            onChange={onChangeImageUrl}
+            value={imageUrlValue}
             placeholder="Изображение"
           ></input>
           <input
-            ref={titleRef}
+            onChange={onChangeTitle}
             className="title-input"
             placeholder="Заголовок..."
-            defaultValue={title}
+            value={titleValue}
           ></input>
           <SpecialPanel
+            id={id}
             title={title}
             publishedAt={publishedAt}
             margin="0"
@@ -69,6 +78,7 @@ const PostFormContainer = ({
           />
         </div>
         <div
+          data-placeholder="Статья..."
           contentEditable={true}
           suppressContentEditableWarning={true}
           className="content"
@@ -85,6 +95,7 @@ export const PostForm = styled(PostFormContainer)`
   display: flex;
   margin: 0 auto;
   align-items: center;
+  width: 100%;
 
   .input-box > input {
     width: 100%;
@@ -122,5 +133,14 @@ export const PostForm = styled(PostFormContainer)`
   & .content {
     padding: 10px;
     white-space: pre-line;
+    border: 1px solid #000;
+    height: 100%;
+    min-height: 450px;
+
+    &:empty::before {
+      content: attr(data-placeholder);
+      color: #888;
+      pointer-events: none;
+    }
   }
 `
