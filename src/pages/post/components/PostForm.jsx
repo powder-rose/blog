@@ -22,6 +22,7 @@ const PostFormContainer = ({
     setTitleValue(title)
     setImageUrlValue(imageUrl)
   }, [title, imageUrl])
+
   const contentRef = useRef(null)
   const navigate = useNavigate()
   const requestServer = useServerRequest()
@@ -37,7 +38,6 @@ const PostFormContainer = ({
         content: newContent,
       })
     ).then((post) => {
-      console.log(post)
       navigate(`/post/${post.id}`)
     })
   }
