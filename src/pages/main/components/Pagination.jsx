@@ -11,7 +11,9 @@ const PaginationContainer = ({ className, setPage, page }) => {
         Предыдущая
       </OvalButton>
       <div className="current-page">Страница: {page}</div>
-      <OvalButton className="page-button">Следующая</OvalButton>
+      <OvalButton className="page-button" onClick={() => setPage(page + 1)}>
+        Следующая
+      </OvalButton>
       <OvalButton className="page-button" onClick={() => setPage(1)}>
         В конец
       </OvalButton>
