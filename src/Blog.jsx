@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { Modal } from './components'
 
 const Page = styled.div`
-  padding: 187px 0;
+  padding: 187px 0 0 0;
 `
 
 const AppContent = styled.div`
