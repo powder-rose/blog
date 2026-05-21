@@ -5,7 +5,11 @@ export const getPosts = async (page, limit) => {
 
   const response = await fetch(url)
 
-  const data = await response.json()
+  const posts = await response.json()
+  const links = response.headers.get('Link')
 
-  return data.map(transformPost)
+  return {
+    posts: posts.map(transformPost),
+    links,
+  }
 }

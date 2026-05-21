@@ -8,11 +8,13 @@ import { PAGINATION_LIMIT } from '../../constants'
 const MainContainer = ({ className }) => {
   const [posts, setPosts] = useState([])
   const [page, setPage] = useState(1)
+  const [lastPage, setLastPage] = useState(1)
   const requestServer = useServerRequest()
 
   useEffect(() => {
-    requestServer('fetchPosts', page, PAGINATION_LIMIT).then((posts) => {
+    requestServer('fetchPosts', page, PAGINATION_LIMIT).then((posts, links) => {
       setPosts(posts.response)
+      setLastPage(2)
     })
   }, [requestServer, page])
 
@@ -31,7 +33,9 @@ const MainContainer = ({ className }) => {
           />
         ))}
       </div>
-      <Pagination setPage={setPage} page={page} />
+      {lastPage > 1 && (
+        <Pagination setPage={setPage} page={page} lastPage={lastPage} />
+      )}
     </div>
   )
 }
