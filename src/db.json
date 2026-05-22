@@ -236,6 +236,17 @@
         "registeredAt": "2026-27-04",
         "roleId": 0
       }
+    },
+    {
+      "hash": "0.83997046632483141070935062089120037853717803955078",
+      "user": {
+        "id": "001",
+        "login": "user",
+        "password": "qwerty123",
+        "registeredAt": "2026-27-04",
+        "roleId": 0
+      },
+      "id": "mO7bHp5"
     }
   ]
 }

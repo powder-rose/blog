@@ -4,6 +4,7 @@ import { useServerRequest } from '../../hooks'
 import { PostCard } from './components'
 import { Pagination } from './components'
 import { PAGINATION_LIMIT } from '../../constants'
+import { getLastPageFromLinks } from './utils/index.js'
 
 const MainContainer = ({ className }) => {
   const [posts, setPosts] = useState([])
@@ -12,10 +13,15 @@ const MainContainer = ({ className }) => {
   const requestServer = useServerRequest()
 
   useEffect(() => {
-    requestServer('fetchPosts', page, PAGINATION_LIMIT).then((posts, links) => {
-      setPosts(posts.response)
-      setLastPage(2)
-    })
+    requestServer('fetchPosts', page, PAGINATION_LIMIT).then(
+      ({ response, links }) => {
+        setPosts(response)
+
+        const last = getLastPageFromLinks(links)
+
+        setLastPage(last)
+      }
+    )
   }, [requestServer, page])
 
   return (
@@ -45,6 +51,6 @@ export const Main = styled(MainContainer)`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 50px;
+    margin: 50px 0;
   }
 `
