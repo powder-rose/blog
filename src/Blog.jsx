@@ -8,16 +8,19 @@ import { useDispatch } from 'react-redux'
 import { Modal } from './components'
 
 const Page = styled.div`
-  padding: 187px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: 195px;
 `
 
 const AppContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 100vh;
 `
 
-function Blog() {
+function BlogContainer() {
   const dispatch = useDispatch()
 
   useLayoutEffect(() => {
@@ -55,4 +58,8 @@ function Blog() {
   )
 }
 
-export default Blog
+export const Blog = styled(BlogContainer)`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`

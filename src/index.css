@@ -7,12 +7,13 @@
     font-family: "Comfortaa", sans-serif;
     box-sizing: border-box;
     overflow-x: hidden;
+
 }
 
-
-
-html, body, #root {
-    height: 100%;
+html,
+body,
+#root {
+    min-height: 100vh;
 }
 
 

@@ -64,8 +64,7 @@ const UsersContainer = ({ className }) => {
 export const Users = styled(UsersContainer)`
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
-  justify-content: space-evenly;
+  margin: 0 auto 100px;
   width: 1000px;
   text-align: center;
   font-weight: bold;

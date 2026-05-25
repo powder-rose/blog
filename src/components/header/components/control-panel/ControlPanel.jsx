@@ -20,7 +20,7 @@ import { logout } from '../../../../actions'
 const RightAligned = styled.div`
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+
   margin-bottom: 10px;
 `
 
@@ -28,14 +28,13 @@ const RightAlignedColumn = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
-  gap: 10px;
 `
 
 const IconButton = styled.button`
   border: none;
   background: none;
   cursor: pointer;
-  margin-left: 7px;
+  margin-left: 4px;
 `
 const ContainerUser = styled.div`
   display: flex;
@@ -89,7 +88,9 @@ const ControlPanelContainer = ({ className }) => {
           </Link>
         ) : null}
 
-        <OvalButton onClick={() => navigate(-1)}>Назад</OvalButton>
+        <OvalButton backgroundhover="#D7BFFFFF" onClick={() => navigate(-1)}>
+          Назад
+        </OvalButton>
       </RightAlignedColumn>
     </div>
   )

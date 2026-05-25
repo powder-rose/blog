@@ -5,6 +5,6 @@ const H2Container = ({ className, children }) => {
 }
 
 export const H2 = styled(H2Container)`
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 `
