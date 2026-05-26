@@ -28,7 +28,7 @@ const PostFormContainer = ({
   const requestServer = useServerRequest()
 
   const onSave = () => {
-    const newContent = sanitizeContent(contentRef.current.innerText)
+    const newContent = sanitizeContent(contentRef.current.innerHTML)
 
     dispatch(
       savePostAsync(requestServer, {
@@ -38,7 +38,11 @@ const PostFormContainer = ({
         content: newContent,
       })
     ).then((post) => {
-      navigate(`/post/${post.id}`)
+      if (!post) {
+        return
+      }
+
+      return navigate(`/post/${post.id}`)
     })
   }
 

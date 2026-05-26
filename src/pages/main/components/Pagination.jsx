@@ -5,6 +5,7 @@ const PaginationContainer = ({ className, setPage, page, lastPage }) => {
   return (
     <div className={className}>
       <OvalButton
+        width="160"
         disabled={page === 1}
         className="page-button"
         onClick={() => setPage(1)}
@@ -12,6 +13,7 @@ const PaginationContainer = ({ className, setPage, page, lastPage }) => {
         В начало
       </OvalButton>
       <OvalButton
+        width="160"
         disabled={page === 1}
         className="page-button"
         onClick={() => setPage(page - 1)}
@@ -20,6 +22,7 @@ const PaginationContainer = ({ className, setPage, page, lastPage }) => {
       </OvalButton>
       <div className="current-page">Страница: {page}</div>
       <OvalButton
+        width="160"
         disabled={page === lastPage}
         className="page-button"
         onClick={() => setPage(page + 1)}
@@ -27,6 +30,7 @@ const PaginationContainer = ({ className, setPage, page, lastPage }) => {
         Следующая
       </OvalButton>
       <OvalButton
+        width="160"
         disabled={page === lastPage}
         className="page-button"
         onClick={() => setPage(lastPage)}

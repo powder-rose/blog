@@ -5,6 +5,5 @@ export const savePostAsync =
     const updatedPost = await requestServer('savePost', newPostData)
 
     dispatch(setPostData(updatedPost.response))
-
     return updatedPost.response
   }

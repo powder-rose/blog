@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 import { Routes, Route } from 'react-router-dom'
-import { Header, Footer } from './components'
+import { Header, Footer, Error } from './components'
 import { Post, Authorization, Registaration, Users, Main } from './pages'
 import { useLayoutEffect } from 'react'
 import { setUser } from './actions'
 import { useDispatch } from 'react-redux'
 import { Modal } from './components'
+import { ERROR } from './constants/index.js'
 
 const Page = styled.div`
   display: flex;
@@ -48,8 +49,14 @@ function BlogContainer() {
           <Route path="/post" element={<Post />}></Route>
           <Route path="/post/:id" element={<Post />}></Route>
           <Route path="/post/:id/edit" element={<Post />}></Route>
-          <Route path="/post/:id/*" element={<div>Ошибка</div>}></Route>
-          <Route path="/*" element={<div>Ошибка</div>}></Route>
+          <Route
+            path="/post/:id/*"
+            element={<Error error={ERROR.PAGE_NOT_EXIST} />}
+          ></Route>
+          <Route
+            path="/*"
+            element={<Error error={ERROR.PAGE_NOT_EXIST} />}
+          ></Route>
         </Routes>
       </Page>
       <Footer />

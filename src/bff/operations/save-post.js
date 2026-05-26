@@ -18,8 +18,6 @@ export const savePost = async (hash, newPostData) => {
       ? await addPost(newPostData)
       : await updatePost(newPostData)
 
-  console.log(savedPost)
-
   return {
     error: null,
     response: savedPost,

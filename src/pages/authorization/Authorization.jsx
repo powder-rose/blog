@@ -77,7 +77,7 @@ const AuthorizationContainer = ({ className }) => {
   return (
     <div className={className}>
       <H2>Авторизация</H2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <Input
           type="text"
           placeholder="Логин..."
@@ -92,13 +92,11 @@ const AuthorizationContainer = ({ className }) => {
             onChange: () => setServerError(null),
           })}
         />
-
         <OvalButton
           disabled={!!formError}
           type="submit"
           background="#df9cff"
           backgroundhover="#df9cf0"
-          width="312"
           height="36"
         >
           Авторизоваться
@@ -106,9 +104,9 @@ const AuthorizationContainer = ({ className }) => {
         {errorMessage && <AuthFormError>{errorMessage}</AuthFormError>}
         <Link to="/register">
           <OvalButton
+            margin="0 0 15px 0"
             background="#df9cff"
             backgroundhover="#df9cf0"
-            width="312"
             height="36"
           >
             Регистрация
@@ -124,13 +122,14 @@ export const Authorization = styled(AuthorizationContainer)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   & > form {
-    gap: 1.3rem;
+    min-width: 350px;
+
     display: flex;
     flex-direction: column;
-    width: 312px;
-    align-items: center;
-    margin: 1rem;
+    gap: 1.2rem;
+    padding: 0 1rem;
   }
 `

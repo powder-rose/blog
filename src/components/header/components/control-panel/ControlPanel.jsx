@@ -24,6 +24,13 @@ const RightAligned = styled.div`
   margin-bottom: 10px;
 `
 
+const Star = styled.div`
+  color: #000000;
+  margin-right: 3px;
+  margin-bottom: 3px;
+  font-size: 20px;
+`
+
 const RightAlignedColumn = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -38,7 +45,8 @@ const IconButton = styled.button`
 `
 const ContainerUser = styled.div`
   display: flex;
-  justify-content: end;
+  align-items: center;
+  justify-content: flex-end;
   margin: 10px;
 `
 const BoldText = styled.p`
@@ -61,6 +69,7 @@ const ControlPanelContainer = ({ className }) => {
     <div className={className}>
       {roleId !== ROLE.GUEST ? (
         <ContainerUser>
+          <Star>★</Star>
           <BoldText>{login}</BoldText>
           <IconButton onClick={onLogout}>
             <Icon size={20} id={faArrowRightFromBracket} />
@@ -82,13 +91,23 @@ const ControlPanelContainer = ({ className }) => {
       <RightAlignedColumn>
         {roleId === ROLE.GUEST ? (
           <Link to="/login">
-            <OvalButton backgroundhover="#d985ff" background="#e09cff">
+            <OvalButton
+              width="130"
+              margin="0 0 13px 0"
+              backgroundhover="#d985ff"
+              background="#e09cff"
+            >
               Войти
             </OvalButton>
           </Link>
         ) : null}
 
-        <OvalButton backgroundhover="#D7BFFFFF" onClick={() => navigate(-1)}>
+        <OvalButton
+          margin="0 0 13px 0"
+          width="130"
+          backgroundhover="#D7BFFFFF"
+          onClick={() => navigate(-1)}
+        >
           Назад
         </OvalButton>
       </RightAlignedColumn>
@@ -98,6 +117,7 @@ const ControlPanelContainer = ({ className }) => {
 
 export const ControlPanel = styled(ControlPanelContainer)`
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
