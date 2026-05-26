@@ -1,10 +1,15 @@
 import { setPostData } from './set-post-data.js'
 
 export const addCommentAsync =
-  (requestServer, userId, postId, content) => async (dispatch) => {
-    requestServer('addPostComment', postId, userId, content).then(
-      (postData) => {
-        dispatch(setPostData(postData.response))
-      }
+  (requestServer, postId, userId, content) => async (dispatch) => {
+    const postData = await requestServer(
+      'addPostComment',
+      postId,
+      userId,
+      content
     )
+
+    dispatch(setPostData(postData.response))
+
+    return postData.response
   }

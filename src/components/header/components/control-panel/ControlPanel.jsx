@@ -16,6 +16,7 @@ import {
   selectUserSession,
 } from '../../../../selectors'
 import { logout } from '../../../../actions'
+import { checkAccess } from '../../../../utils/index.js'
 
 const RightAligned = styled.div`
   display: flex;
@@ -60,6 +61,8 @@ const ControlPanelContainer = ({ className }) => {
   const login = useSelector(selectUserLogin)
   const session = useSelector(selectUserSession)
 
+  const isAdmin = checkAccess([ROLE.ADMIN], roleId)
+
   const onLogout = () => {
     dispatch(logout(session))
     sessionStorage.removeItem('userData')
@@ -77,16 +80,20 @@ const ControlPanelContainer = ({ className }) => {
         </ContainerUser>
       ) : null}
       <RightAligned>
-        <Link to="/post">
-          <RoundButton title="Новая статья">
-            <Icon size={24} id={faFileLines} />
-          </RoundButton>
-        </Link>
-        <Link to="/users">
-          <RoundButton>
-            <Icon size={23} id={faUserGroup} />
-          </RoundButton>
-        </Link>
+        {isAdmin && (
+          <>
+            <Link to="/post">
+              <RoundButton title="Новая статья">
+                <Icon size={24} id={faFileLines} />
+              </RoundButton>
+            </Link>
+            <Link to="/users">
+              <RoundButton>
+                <Icon size={23} id={faUserGroup} />
+              </RoundButton>
+            </Link>
+          </>
+        )}
       </RightAligned>
       <RightAlignedColumn>
         {roleId === ROLE.GUEST ? (

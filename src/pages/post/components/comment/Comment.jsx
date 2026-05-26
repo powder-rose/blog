@@ -2,9 +2,11 @@ import styled from 'styled-components'
 import { Icon, RoundButton } from '../../../../components'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { CLOSE_MODAL, openModal, removeCommentAsync } from '../../../../actions'
 import { useServerRequest } from '../../../../hooks'
+import { selectUserRole } from '../../../../selectors/index.js'
+import { ROLE } from '../../../../constants/index.js'
 
 const CommentContainer = ({
   className,
@@ -16,6 +18,8 @@ const CommentContainer = ({
 }) => {
   const dispatch = useDispatch()
   const requestServer = useServerRequest()
+  const userRole = useSelector(selectUserRole)
+  const isAdminOrModerator = [ROLE.ADMIN, ROLE.MODERATOR].includes(userRole)
 
   const onCommentRemove = (id) => {
     dispatch(
@@ -45,15 +49,16 @@ const CommentContainer = ({
         </div>
         <div className="comment-text">{content}</div>
       </div>
-
-      <RoundButton
-        onClick={() => {
-          onCommentRemove(id)
-        }}
-        className="trash-button"
-      >
-        <Icon size={20} id={faTrash} />
-      </RoundButton>
+      {isAdminOrModerator && (
+        <RoundButton
+          onClick={() => {
+            onCommentRemove(id)
+          }}
+          className="trash-button"
+        >
+          <Icon size={20} id={faTrash} />
+        </RoundButton>
+      )}
     </div>
   )
 }

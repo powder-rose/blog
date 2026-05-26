@@ -3,6 +3,8 @@ import { faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 import { SpecialPanel } from './special-panel/SpecialPanel.jsx'
 import { Icon, RoundButton } from '../../../components/index.js'
 import { useNavigate } from 'react-router-dom'
+import { checkAccess } from '../../../utils/index.js'
+import { ROLE } from '../../../constants/index.js'
 
 const PostContentContainer = ({
   post: { id, title, imageUrl, content, publishedAt },

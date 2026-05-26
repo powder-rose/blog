@@ -1,6 +1,6 @@
 import { generateDate } from '../utils/index.js'
 
-export const addComment = (postId, content, userId) =>
+export const addComment = (userId, postId, content) =>
   fetch(`http://localhost:3005/comments`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json; charset=UTF-8' },

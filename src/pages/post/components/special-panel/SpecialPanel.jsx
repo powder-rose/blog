@@ -1,10 +1,13 @@
 import { Icon, RoundButton } from '../../../../components/index.js'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { CLOSE_MODAL, openModal, removePostAsync } from '../../../../actions'
 import { useServerRequest } from '../../../../hooks'
 import { useNavigate } from 'react-router-dom'
+import { checkAccess } from '../../../../utils/index.js'
+import { ROLE } from '../../../../constants/index.js'
+import { selectUserRole } from '../../../../selectors/index.js'
 
 const SpecialPanelContainer = ({
   className,
@@ -16,6 +19,8 @@ const SpecialPanelContainer = ({
   const dispatch = useDispatch()
   const requestServer = useServerRequest()
   const navigate = useNavigate()
+  const roleId = useSelector(selectUserRole)
+  const isAdmin = checkAccess([ROLE.ADMIN], roleId)
 
   const onPostRemove = (id) => {
     dispatch(
@@ -36,15 +41,20 @@ const SpecialPanelContainer = ({
   return (
     <div className={className}>
       {publishedAt && <div className="published">{publishedAt}</div>}
-      <div className="buttons-container">
-        {editButton}
-        {saveButton}
-        {publishedAt && (
-          <RoundButton className="post-button" onClick={() => onPostRemove(id)}>
-            <Icon size={20} id={faTrash} />
-          </RoundButton>
-        )}
-      </div>
+      {isAdmin && (
+        <div className="buttons-container">
+          {editButton}
+          {saveButton}
+          {publishedAt && (
+            <RoundButton
+              className="post-button"
+              onClick={() => onPostRemove(id)}
+            >
+              <Icon size={20} id={faTrash} />
+            </RoundButton>
+          )}
+        </div>
+      )}
     </div>
   )
 }

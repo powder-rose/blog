@@ -61,7 +61,6 @@ const PostContainer = ({ className }) => {
         <Comments postId={post.id} comments={post.comments} />
       </div>
     )
-
   return error ? <Error error={error} /> : SpecificPostPage
 }
 

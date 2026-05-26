@@ -4,43 +4,54 @@ import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { useState } from 'react'
 import { Comment } from './comment'
 import { useDispatch, useSelector } from 'react-redux'
-import { SelectUserId } from '../../../selectors'
+import { SelectUserId, selectUserRole } from '../../../selectors'
 import { useServerRequest } from '../../../hooks'
 import { addCommentAsync } from '../../../actions'
+import { ROLE } from '../../../constants'
 
 const CommentsContainer = ({ className, comments, postId }) => {
   const [newComment, setNewComment] = useState('')
   const dispatch = useDispatch()
   const userId = useSelector(SelectUserId)
   const requestServer = useServerRequest()
+  const roleId = useSelector(selectUserRole)
+  const isGuest = roleId === ROLE.GUEST
 
-  const onNewCommentAdd = (postId, userId, content) => {
-    dispatch(addCommentAsync(requestServer, postId, userId, content))
+  const onNewCommentAdd = async (postId, userId, content) => {
+    await dispatch(addCommentAsync(requestServer, postId, userId, content))
+
     setNewComment('')
   }
 
   return (
     <div className={className}>
       <h2 className="header-comments">Комментарии</h2>
-      <div className="comment-content">
-        <textarea
-          name="comment"
-          value={newComment}
-          placeholder="Поделитесь мнением..."
-          className="textarea"
-          onChange={({ target }) => {
-            setNewComment(target.value)
-          }}
-        ></textarea>
-        <div>
-          <RoundButton
-            className="comment-button"
-            onClick={() => onNewCommentAdd(postId, userId, newComment)}
-          >
-            <Icon className="comment-icon" size={20} id={faPaperPlane} />
-          </RoundButton>
-        </div>
-      </div>
+
+      {!isGuest && (
+        <>
+          <div className="comment-content">
+            <textarea
+              name="comment"
+              value={newComment}
+              placeholder="Поделитесь мнением..."
+              className="textarea"
+              onChange={({ target }) => {
+                setNewComment(target.value)
+              }}
+            />
+          </div>
+
+          <div>
+            <RoundButton
+              className="comment-button"
+              onClick={() => onNewCommentAdd(postId, userId, newComment)}
+            >
+              <Icon className="comment-icon" size={20} id={faPaperPlane} />
+            </RoundButton>
+          </div>
+        </>
+      )}
+
       <div className="comments">
         {comments.map(({ id, author, content, publishedAt }) => (
           <Comment
