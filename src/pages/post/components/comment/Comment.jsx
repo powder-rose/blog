@@ -7,6 +7,7 @@ import { CLOSE_MODAL, openModal, removeCommentAsync } from '../../../../actions'
 import { useServerRequest } from '../../../../hooks'
 import { selectUserRole } from '../../../../selectors/index.js'
 import { ROLE } from '../../../../constants/index.js'
+import PropTypes from 'prop-types'
 
 const CommentContainer = ({
   className,
@@ -101,3 +102,11 @@ export const Comment = styled(CommentContainer)`
     font-weight: bold;
   }
 `
+
+Comment.propTypes = {
+  postId: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  author: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  publishedAt: PropTypes.string.isRequired,
+}

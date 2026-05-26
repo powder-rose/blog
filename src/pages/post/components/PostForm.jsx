@@ -9,6 +9,7 @@ import { savePostAsync } from '../../../actions/save-post-async.js'
 import { useNavigate } from 'react-router-dom'
 import { useServerRequest } from '../../../hooks/index.js'
 import { Icon, RoundButton } from '../../../components/index.js'
+import { PROP_TYPE } from '../../../constants/index.js'
 
 const PostFormContainer = ({
   post: { id, title, imageUrl, content, publishedAt },
@@ -148,3 +149,6 @@ export const PostForm = styled(PostFormContainer)`
     }
   }
 `
+PostForm.propTypes = {
+  post: PROP_TYPE.POST.isRequired,
+}

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { OvalButton } from '../../../components/button/OvalButton.jsx'
+import PropTypes from 'prop-types'
 
 const PaginationContainer = ({ className, setPage, page, lastPage }) => {
   return (
@@ -69,3 +70,9 @@ export const Pagination = styled(PaginationContainer)`
     }
   }
 `
+
+Pagination.propTypes = {
+  page: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
+  lastPage: PropTypes.number.isRequired,
+}

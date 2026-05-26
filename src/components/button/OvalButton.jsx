@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
-const OvalButtonContainer = ({ className, children, ...props }) => {
+const OvalButtonContainer = ({ className, children, width, ...props }) => {
   return (
     <button className={className} {...props}>
       {children}
@@ -23,3 +24,7 @@ export const OvalButton = styled(OvalButtonContainer)`
     background-color: ${({ backgroundhover }) => backgroundhover};
   }
 `
+OvalButton.propTypes = {
+  children: PropTypes.node.isRequired,
+  width: PropTypes.string,
+}

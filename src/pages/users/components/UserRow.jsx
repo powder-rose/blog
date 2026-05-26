@@ -4,6 +4,8 @@ import { RoundButton } from '../../../components'
 import { Icon } from '../../../components'
 import { useState } from 'react'
 import { useServerRequest } from '../../../hooks'
+import PropTypes from 'prop-types'
+import { PROP_TYPE } from '../../../constants/index.js'
 
 const UserRowContainer = ({
   id,
@@ -83,3 +85,12 @@ export const UserRow = styled(UserRowContainer)`
     gap: 10px;
   }
 `
+UserRow.propTypes = {
+  id: PropTypes.string.isRequired,
+  login: PropTypes.string.isRequired,
+  registeredAt: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
+  roleId: PROP_TYPE.ROLE_ID.isRequired,
+  roles: PropTypes.arrayOf(PROP_TYPE.ROLE).isRequired,
+  onUserRemove: PropTypes.func.isRequired,
+}

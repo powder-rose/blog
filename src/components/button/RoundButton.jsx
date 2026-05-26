@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const ButtonContainer = ({ className, children, title, ...props }) => (
   <>
@@ -23,3 +24,8 @@ export const RoundButton = styled(ButtonContainer)`
     cursor: pointer;
   }
 `
+
+RoundButton.propTypes = {
+  children: PropTypes.node.isRequired,
+  title: PropTypes.string,
+}
