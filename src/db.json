@@ -2,31 +2,24 @@
   "users": [
     {
       "id": "001",
-      "login": "user",
+      "login": "kitty",
       "password": "qwerty123",
       "role_id": 0,
       "registered_at": "2026-27-04"
-    },
-    {
-      "id": "7f45",
-      "login": "ivan",
-      "password": "rita123",
-      "registered_at": "2054-07-24 01:40",
-      "role_id": 1
     },
     {
       "id": "7f7c",
       "login": "moon",
       "password": "moon123",
       "registered_at": "2058.08.04 10:08",
-      "role_id": 2
+      "role_id": 1
     },
     {
-      "login": "powderroses",
-      "password": "powderroses",
-      "registered_at": "2055.08.31 11:54",
+      "login": "star",
+      "password": "star123",
+      "registered_at": "2058.08.22 20:08",
       "role_id": 2,
-      "id": "QWwxQat"
+      "id": "9tx7I0j"
     }
   ],
   "roles": [
@@ -475,6 +468,17 @@
         "roleId": 0
       },
       "id": "MSo4qa4"
+    },
+    {
+      "hash": "0.17007570939389626829552071285434067249298095703125",
+      "user": {
+        "id": "001",
+        "login": "kitty",
+        "password": "qwerty123",
+        "registeredAt": "2026-27-04",
+        "roleId": 0
+      },
+      "id": "NHFwmPz"
     }
   ]
 }

@@ -7,7 +7,7 @@ export const updateUserRole = async (hash, userId, newUserRoleId) => {
 
   const access = await sessions.access(hash, accessRoles)
 
-  if (access) {
+  if (!access) {
     return {
       error: 'Доступ запрещен',
       response: null,

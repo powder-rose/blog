@@ -114,8 +114,9 @@ const RegistrationContainer = ({ className }) => {
           type="submit"
           background="#df9cff"
           backgroundhover="#df9cf0"
-          width="312"
+          width="350"
           height="36"
+          margin="0 0 15px 0"
         >
           Зарегестрироваться
         </OvalButton>
@@ -135,8 +136,9 @@ export const Registaration = styled(RegistrationContainer)`
     gap: 1.3rem;
     display: flex;
     flex-direction: column;
-    width: 312px;
+    min-width: 350px;
     align-items: center;
     margin: 1rem;
+    padding: 0 1rem;
   }
 `

@@ -40,9 +40,7 @@ const CommentsContainer = ({ className, comments, postId }) => {
                 setNewComment(target.value)
               }}
             />
-          </div>
 
-          <div>
             <RoundButton
               className="comment-button"
               onClick={() => onNewCommentAdd(postId, userId, newComment)}
